@@ -1,0 +1,17 @@
+{
+  "name": "tatu",
+  "version": "0.0.1",
+  "description": "Data extractor",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "keywords": [
+    "tatu",
+    "data",
+    "javascript",
+    "html"
+  ],
+  "author": "Almir Filho",
+  "license": "ISC"
+}
