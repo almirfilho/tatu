@@ -53,3 +53,44 @@ describe 'tatu', ->
       '''
       expect tatu document.body
         .to.deep.equal genre: 'rock'
+
+  describe 'list properties', ->
+    ###
+    given an arbitrary html node marked with `data-tu`:
+
+    <ul>
+      <li data-tu="prop">value 1</li>
+      <li data-tu="prop">value 2</li>
+      <li data-tu="prop">value 3</li>
+    </ul>
+
+    it should return an object with list:
+
+    {
+      prop: ['value 1', 'value 2', 'value 3']
+    }
+    ###
+
+    before -> u.inject '''
+        <span data-tu="beatles">john</span>
+        <span data-tu="beatles">paul</span>
+        <span data-tu="beatles">george</span>
+        <span data-tu="beatles">ringo</span>
+      '''
+
+    it 'should return a single prop', ->
+      expect tatu document.body
+        .to.have.keys 'beatles'
+
+    it 'should return an array', ->
+      expect tatu(document.body).beatles
+        .to.be.instanceof Array
+        .and.to.be.not.empty
+
+    it 'should return array values', ->
+      expect tatu(document.body).beatles
+        .to.have.length 4
+        .and.to.contain 'john'
+        .and.to.contain 'paul'
+        .and.to.contain 'george'
+        .and.to.contain 'ringo'
