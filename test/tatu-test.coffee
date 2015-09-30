@@ -4,6 +4,20 @@ u = require './utils'
 
 describe 'tatu', ->
 
+  describe 'single element property', ->
+    ###
+    given an arbitrary html node marked with `data-tu`:
+
+    <p data-tu="prop">value</p>
+
+    it should return an string: 'value'
+    ###
+
+    it 'should return value', ->
+      u.inject '<h1 data-tu="title">Elvis is alive</h1>'
+      expect tatu u.one 'h1'
+        .to.be.equal 'Elvis is alive'
+
   describe 'simple properties', ->
     ###
     given an arbitrary html node marked with `data-tu`:
@@ -94,3 +108,52 @@ describe 'tatu', ->
         .and.to.contain 'paul'
         .and.to.contain 'george'
         .and.to.contain 'ringo'
+
+  describe 'object properties', ->
+    ###
+    given an arbitrary html node marked with `data-tu`:
+
+    <div>
+      <div data-tu="obj">
+        <span data-tu="prop1">value 1</span>
+        <span data-tu="prop2">value 2</span>
+      </div>
+    </div>
+
+    it should return an object like:
+
+    {
+      obj: {
+        prop1: 'value 1',
+        prop2: 'value 2'
+      }
+    }
+    ###
+
+    before ->
+      u.inject '''
+        <div data-tu="band">
+          <span data-tu="name">pink floyd</span>
+          <span data-tu="country">england</span>
+        </div>
+      '''
+
+    it 'should return property as an object', ->
+      expect tatu(document.body).band
+        .to.be.an 'object'
+
+    it 'should return nested properties', ->
+      expect tatu(document.body).band
+        .to.have.keys 'name', 'country'
+
+    it 'should return nested values', ->
+      expect tatu(document.body).band
+        .to.deep.equal name: 'pink floyd', country: 'england'
+
+    # it 'should not return nested properties outside of its object', ->
+    #   expect tatu document.body
+    #     .to.not.contain.keys 'name', 'country'
+
+    # it 'should return nested values', ->
+    #   expect tatu document.body
+    #     .to.deep.equal band: name: 'pink floyd', country: 'england'
