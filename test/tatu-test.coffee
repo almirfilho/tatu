@@ -150,10 +150,6 @@ describe 'tatu', ->
       expect tatu(document.body).band
         .to.deep.equal name: 'pink floyd', country: 'england'
 
-    # it 'should not return nested properties outside of its object', ->
-    #   expect tatu document.body
-    #     .to.not.contain.keys 'name', 'country'
-
-    # it 'should return nested values', ->
-    #   expect tatu document.body
-    #     .to.deep.equal band: name: 'pink floyd', country: 'england'
+    it 'should not return nested properties outside of its object', ->
+      expect tatu document.body
+        .to.not.contain.keys 'name', 'country'
