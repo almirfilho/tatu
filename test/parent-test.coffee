@@ -23,11 +23,25 @@ describe 'parent', ->
       .to.exist
       .and.to.have.property 'id', 'black-sabbath'
 
-  it 'should return parent', ->
+  it 'should return parent of parent', ->
     u.inject '''
       <div id="black-sabbath" data-tu>
         <div>
           <span>iron maiden</span>
+        </div>
+      </div>
+    '''
+    expect parent u.one 'span'
+      .to.exist
+      .and.to.have.property 'id', 'black-sabbath'
+
+  it 'should return immediate parent', ->
+    u.inject '''
+      <div data-tu>
+        <div id="black-sabbath" data-tu>
+          <div>
+            <span>iron maiden</span>
+          </div>
         </div>
       </div>
     '''
