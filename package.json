@@ -2,9 +2,10 @@
   "name": "tatu",
   "version": "0.0.1",
   "description": "Data extractor",
-  "main": "index.js",
+  "main": "./dist/lib/tatu.js",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "build": "grunt build"
   },
   "keywords": [
     "tatu",
