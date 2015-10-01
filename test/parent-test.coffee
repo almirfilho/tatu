@@ -2,7 +2,7 @@ expect = require('chai').expect
 parent = require '../src/parent'
 u = require './utils'
 
-describe 'parent', ->
+describe 'parent()', ->
 
   it 'should return null when there is no parent', ->
     u.inject '''

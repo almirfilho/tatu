@@ -2,9 +2,9 @@ expect = require('chai').expect
 tatu = require '../src/tatu'
 u = require './utils'
 
-describe 'tatu', ->
+describe 'tatu()', ->
 
-  describe 'single element property', ->
+  describe 'extracting a single element property', ->
     ###
     given an arbitrary html node marked with `data-tu`:
 
@@ -18,7 +18,7 @@ describe 'tatu', ->
       expect tatu u.one 'h1'
         .to.be.equal 'Elvis is alive'
 
-  describe 'simple properties', ->
+  describe 'extracting simple properties', ->
     ###
     given an arbitrary html node marked with `data-tu`:
 
@@ -68,7 +68,7 @@ describe 'tatu', ->
       expect tatu document.body
         .to.deep.equal genre: 'rock'
 
-  describe 'list properties', ->
+  describe 'extracting list properties', ->
     ###
     given an arbitrary html node marked with `data-tu`:
 
@@ -109,7 +109,7 @@ describe 'tatu', ->
         .and.to.contain 'george'
         .and.to.contain 'ringo'
 
-  describe 'object properties', ->
+  describe 'extracting object properties', ->
     ###
     given an arbitrary html node marked with `data-tu`:
 
