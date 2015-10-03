@@ -1,5 +1,8 @@
 module.exports = (grunt) ->
-  grunt.registerTask 'dev', 'watch'
+  grunt.registerTask 'dev', [
+    'test'
+    'watch'
+  ]
 
   grunt.registerTask 'test', [
     'coffeelint'
