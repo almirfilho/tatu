@@ -172,3 +172,15 @@ describe 'tatu()', ->
       it 'should not have child property', ->
         expect tatu(document.body).object
           .to.not.have.keys 'prop'
+
+  describe 'extracting attribute properties', ->
+    before ->
+      u.inject '<a href="http://google.com" data-tu="url@href">element text</a>'
+
+    it 'should return property', ->
+      expect tatu document.body
+        .to.have.keys 'url'
+
+    it 'should return value', ->
+      expect tatu document.body
+        .to.have.property 'url', 'http://google.com/'
