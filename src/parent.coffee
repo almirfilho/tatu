@@ -1,8 +1,3 @@
-parent = (node, attr = 'data-tu') ->
-  father = node.parentElement
-  switch
-    when not father then null
-    when father.hasAttribute attr then father
-    else parent father
-
-module.exports = parent
+module.exports = (node, attr = 'data-tu') ->
+  while node = node.parentElement
+    return node if node.hasAttribute attr
