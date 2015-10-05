@@ -1,19 +1,10 @@
-var parent;
-
-parent = function(node, attr) {
-  var father;
+module.exports = function(node, attr) {
   if (attr == null) {
     attr = 'data-tu';
   }
-  father = node.parentElement;
-  switch (false) {
-    case !!father:
-      return null;
-    case !father.hasAttribute(attr):
-      return father;
-    default:
-      return parent(father);
+  while (node = node.parentElement) {
+    if (node.hasAttribute(attr)) {
+      return node;
+    }
   }
 };
-
-module.exports = parent;
