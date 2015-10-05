@@ -1,11 +1,15 @@
 parent = require './parent'
 
-tatu = (node, internal = false, attr = 'data-tu') ->
+tatu = (node, attr = 'data-tu') ->
   elements = node.querySelectorAll "[#{attr}]"
-  return node.textContent if not elements.length and node.hasAttribute attr
+  internal = false
 
-  unless internal
-    elements = Array.prototype.filter.call elements, (el) -> not parent el
+  if node.hasAttribute attr
+    return node.textContent if not elements.length
+    internal = true
+
+  elements = Array.prototype.filter.call elements, (el) ->
+    if internal then parent(el) is node else not parent el
 
   result = {}
 
@@ -14,9 +18,9 @@ tatu = (node, internal = false, attr = 'data-tu') ->
 
     if prop of result
       result[prop] = [result[prop]] unless result[prop] instanceof Array
-      result[prop].push tatu el, true
+      result[prop].push tatu el
     else if prop
-      result[prop] = tatu el, true
+      result[prop] = tatu el
 
   result
 

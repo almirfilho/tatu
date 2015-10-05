@@ -85,7 +85,8 @@ describe 'tatu()', ->
     }
     ###
 
-    before -> u.inject '''
+    before ->
+      u.inject '''
         <span data-tu="beatles">john</span>
         <span data-tu="beatles">paul</span>
         <span data-tu="beatles">george</span>
@@ -153,3 +154,21 @@ describe 'tatu()', ->
     it 'should not return nested properties outside of its object', ->
       expect tatu document.body
         .to.not.contain.keys 'name', 'country'
+
+    describe 'of nested objects', ->
+      before ->
+        u.inject '''
+          <div data-tu="object">
+            <div data-tu="object">
+              <div data-tu="prop">value</div>
+            </div>
+          </div>
+        '''
+
+      it 'should return property with value', ->
+        expect tatu(document.body).object.object
+          .to.have.property 'prop', 'value'
+
+      it 'should not have child property', ->
+        expect tatu(document.body).object
+          .to.not.have.keys 'prop'
