@@ -173,7 +173,7 @@ describe 'tatu()', ->
         expect tatu(document.body).object
           .to.not.have.keys 'prop'
 
-  describe 'extracting attribute properties', ->
+  describe.skip 'extracting attribute properties', ->
     before ->
       u.inject '<a href="http://google.com" data-tu="url@href">element text</a>'
 
