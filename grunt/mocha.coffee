@@ -3,5 +3,5 @@ module.exports = (grunt) ->
     test:
       src: 'test/**/*-test.coffee'
       options:
-        reporter: 'nyan'
+        reporter: if grunt.option 'travis' then 'spec' else 'nyan'
         require: 'coffee-script/register'
