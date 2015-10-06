@@ -11,8 +11,8 @@ module.exports = (grunt) ->
   grunt.config 'coverage',
     default:
       options:
-        root: '.'
-        dir: 'test'
+        root: 'test'
+        dir: 'coverage'
         thresholds:
           statements: 90
           branches: 90

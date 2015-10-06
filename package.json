@@ -20,7 +20,7 @@
   },
   "config": {
     "coverage": {
-      "dataFile": "test/coverage-coffee.json",
+      "dataFile": "test/coverage/coverage-coffee.json",
       "excludeFiles": [
         ".git",
         "node_modules",
