@@ -18,7 +18,9 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask 'cover', ->
-    require('child_process').spawnSync 'grunt', ['test'], stdio: 'inherit'
+    options = ['test'].concat grunt.option.flags()
+    require('child_process').spawnSync 'grunt', options, stdio: 'inherit'
+
     grunt.task.run [
       'makeReport'
       'coverage'
