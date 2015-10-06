@@ -1,7 +1,7 @@
 module.exports = (grunt) ->
   # grunt-istanbul task
   grunt.config 'makeReport',
-    src: 'test/coverage-coffee.json'
+    src: '<%= pkg.config.coverage.dataFile %>'
     options:
       type: false
       dir: false

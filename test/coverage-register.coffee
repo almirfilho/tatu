@@ -1,13 +1,16 @@
-path = require 'path'
 coffeeCoverage = require 'coffee-coverage'
-projectRoot = path.resolve __dirname, '../'
+rootdir = require('path').resolve __dirname, '../'
+pkg = JSON.parse require('fs').readFileSync "#{rootdir}/package.json", 'utf8'
+
 coverageVar = coffeeCoverage.findIstanbulVariable()
-writeOnExit = if not coverageVar then "#{projectRoot}/test/coverage-coffee.json" else null
+writeOnExit =
+  if coverageVar then null
+  else "#{rootdir}/#{pkg.config.coverage.dataFile}"
 
 coffeeCoverage.register
-    instrumentor: 'istanbul'
-    basePath: projectRoot
-    exclude: ['test', 'node_modules', '.git', 'Gruntfile.coffee', 'grunt']
-    coverageVar: coverageVar
-    writeOnExit: writeOnExit
-    initAll: true
+  instrumentor: 'istanbul'
+  basePath: rootdir
+  exclude: pkg.config.coverage.excludeFiles
+  coverageVar: coverageVar
+  writeOnExit: writeOnExit
+  initAll: true

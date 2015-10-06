@@ -18,6 +18,18 @@
   "engines": {
     "node": ">=4.0.0"
   },
+  "config": {
+    "coverage": {
+      "dataFile": "test/coverage-coffee.json",
+      "excludeFiles": [
+        ".git",
+        "node_modules",
+        "test",
+        "Gruntfile.coffee",
+        "grunt"
+      ]
+    }
+  },
   "devDependencies": {
     "chai": "3.3.0",
     "coffee-coverage": "0.6.3",
