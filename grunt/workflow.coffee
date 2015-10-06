@@ -13,6 +13,13 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask 'build', [
-    'test'
+    'cover'
     'coffee'
   ]
+
+  grunt.registerTask 'cover', ->
+    require('child_process').spawnSync 'grunt', ['test'], stdio: 'inherit'
+    grunt.task.run [
+      'makeReport'
+      'coverage'
+    ]
